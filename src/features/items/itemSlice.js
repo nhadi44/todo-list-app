@@ -6,30 +6,23 @@ const initialState = {
   loading: false,
 };
 
-export const getItems = createAsyncThunk("items/getItems", async () => {
+export const getItems = createAsyncThunk("items/getItems", async (id) => {
   const response = await axios({
     method: "GET",
-    url: "https://todo.api.devcode.gethired.id/todo-items",
+    url: `https://todo.api.devcode.gethired.id/todo-items?activity_group_id=${id}`,
   });
   return response.data;
 });
 
-export const addItem = createAsyncThunk(
-  "items/addItem",
-  async (id, title, priority) => {
-    const response = await axios({
-      method: "POST",
-      url: "https://todo.api.devcode.gethired.id/todo-items",
-      data: {
-        id,
-        title,
-        priority,
-      },
-    });
-    console.log(id, title, priority);
-    return response.data;
-  }
-);
+export const addItem = createAsyncThunk("items/addItem", async (body) => {
+  const response = await axios({
+    method: "POST",
+    url: "https://todo.api.devcode.gethired.id/todo-items",
+    data: body,
+  });
+
+  return response.data;
+});
 
 const itemSlice = createSlice({
   name: "items",

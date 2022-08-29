@@ -9,13 +9,18 @@ import {
   selectTitle,
   updateActivity,
 } from "../../../features/activity/activitySlice";
-import { getItems, selectItems } from "../../../features/items/itemSlice";
+import {
+  addItem,
+  getItems,
+  selectItems,
+} from "../../../features/items/itemSlice";
 
 export const Items = () => {
   const { id } = useParams();
   const [header, setHeader] = useState("");
   const [show, setShow] = useState(false);
   const [priority, setPriority] = useState("very-high");
+  const [checked, setChecked] = useState(false);
   const [itemName, setItemName] = useState("");
 
   const title = useSelector(selectTitle);
@@ -29,8 +34,8 @@ export const Items = () => {
   }, [dispatch, id]);
 
   useEffect(() => {
-    dispatch(getItems());
-  }, [dispatch]);
+    dispatch(getItems(id));
+  }, [dispatch, id]);
 
   const handleUpdate = async (e) => {
     await dispatch(getActivityById(id));
@@ -47,9 +52,9 @@ export const Items = () => {
     document.getElementById("showPriority").classList.toggle("d-none");
   };
 
-  const submitItem = (e) => {
+  const submitItem = async (e) => {
     e.preventDefault();
-    dispatch(updateActivity(id, itemName, priority));
+    await dispatch(addItem({ id, itemName, priority }));
     setShow(false);
   };
 
@@ -227,20 +232,26 @@ export const Items = () => {
         </div>
       </header>
       <main>
-        <section>
-          <Card>
-            <Card.Body>
-              <div>
-                <form>
-                  <input type="cheked" />
-                </form>
-                <span className="d-flex gap-3">
-                  <i className="bi bi-circle-fill very-high"></i>
-                  Very High
-                </span>
-              </div>
-            </Card.Body>
-          </Card>
+        <section className="py-4">
+          {items.map((item, index) => (
+            <Card className="mb-2" key={index}>
+              <Card.Body>
+                <Form>
+                  <Form.Group
+                    className="d-flex align-items-center gap-2"
+                    controlId="formBasicCheckbox"
+                    onChange={(e) => setChecked(e.target.checked)}
+                  >
+                    <Form.Check type="checkbox" />
+                    <span className="d-flex gap-3">
+                      <i className="bi bi-circle-fill very-high"></i>
+                      <span>{item.title}</span>
+                    </span>
+                  </Form.Group>
+                </Form>
+              </Card.Body>
+            </Card>
+          ))}
         </section>
       </main>
     </div>
