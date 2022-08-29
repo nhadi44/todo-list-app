@@ -1,0 +1,77 @@
+.bg-navbar-blue {
+  background: #16abf8;
+}
+.navbar-todo {
+  height: 5rem;
+  display: flex;
+  align-items: center;
+}
+
+.btn-add {
+  background: #16abf8 !important;
+  color: white !important;
+  border-radius: 2.5rem !important;
+  padding: 0.7rem 2rem !important;
+}
+
+.btn-add:hover {
+  background: #15a7f0;
+}
+
+.icon-delete:hover {
+  cursor: pointer;
+}
+
+.card-activity-body {
+  height: 100%;
+}
+
+.card-activity-body:hover {
+  cursor: pointer;
+}
+
+.items__header-input {
+  border: none;
+  font-size: 2rem;
+  font-weight: 700;
+  width: 15rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.items__header {
+  font-size: 2rem;
+  font-weight: 700;
+  width: 15rem;
+}
+
+.items__header-input:focus {
+  outline: none;
+  border-bottom: 1px solid black;
+  width: 20rem;
+}
+
+.form_input-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.very-high {
+  color: #ed4c5c;
+}
+
+.high {
+  color: #f8a541;
+}
+
+.medium {
+  color: #00a790;
+}
+
+.low {
+  color: #428bc1;
+}
+
+.very-low {
+  color: #8942c1;
+}
